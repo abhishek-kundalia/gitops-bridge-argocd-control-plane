@@ -38,7 +38,7 @@ spec:
                 matchLabels:
                   environment: prod
               values:
-                addonChartVersion: v1.4.0
+                addonChartVersion: 1.4.0
   template:
     metadata:
       name: addon-{{name}}-{{values.addonChart}}
