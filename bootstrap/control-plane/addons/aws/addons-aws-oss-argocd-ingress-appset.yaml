@@ -58,7 +58,7 @@ spec:
               - $values/{{.metadata.annotations.addons_repo_basepath}}clusters/{{.name}}/addons/{{.values.addonChart}}/values.yaml
             values: |
               global:
-                domain: {{.metadata.annotations.argocd_domain}}
+                domain: {{.metadata.annotations.argocd_hosts}}
               server:
                 service:
                   type: "ClusterIP"
@@ -77,8 +77,8 @@ spec:
                     serviceType: "ClusterIP"  # Instance mode needs type NodePort, IP mode needs type ClusterIP or NodePort
                     backendProtocolVersion: "GRPC"  # This tells AWS to send traffic from the ALB using HTTP2. Can use gRPC as well if you want to leverage gRPC specific features
                   tls:
-                    - hosts: {{.metadata.annotations.argocd_domain}}
-                  hosts: {{.metadata.annotations.argocd_domain}}
+                    - hosts: {{.metadata.annotations.argocd_hosts}}
+                  hosts: {{.metadata.annotations.argocd_hosts}}
                   paths:
                     - /
                   pathType: Prefix
