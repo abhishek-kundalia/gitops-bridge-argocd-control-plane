@@ -78,6 +78,10 @@ spec:
                     backendProtocolVersion: "GRPC"  # This tells AWS to send traffic from the ALB using HTTP2. Can use gRPC as well if you want to leverage gRPC specific features
                 tls:
                   - hosts: {{.metadata.annotations.argocd_domain}}
+                hosts: {{.metadata.annotations.argocd_domain}}
+                paths:
+                  - /
+                pathType: Prefix
               # server:
               #   serviceType: ClusterIP
               #   servicePort: 2746
