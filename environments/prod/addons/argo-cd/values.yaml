@@ -16,3 +16,11 @@ repoServer:
 
 applicationSet:
   replicas: 2
+
+resources: 
+  limits:
+    cpu: 2
+    memory: 2Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
