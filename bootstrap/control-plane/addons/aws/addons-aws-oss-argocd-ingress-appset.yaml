@@ -76,6 +76,28 @@ spec:
                   aws:
                     serviceType: "ClusterIP"  # Instance mode needs type NodePort, IP mode needs type ClusterIP or NodePort
                     backendProtocolVersion: "GRPC"  # This tells AWS to send traffic from the ALB using HTTP2. Can use gRPC as well if you want to leverage gRPC specific features
+                tls:
+                  - hosts: {{.metadata.annotations.argocd_domain}}
+              # server:
+              #   serviceType: ClusterIP
+              #   servicePort: 2746
+              #   servicePortName: http
+              #   ingress:
+              #     enabled: true
+              #     annotations:
+              #       alb.ingress.kubernetes.io/scheme: "internet-facing"
+              #       alb.ingress.kubernetes.io/target-type: "ip"
+              #       alb.ingress.kubernetes.io/backend-protocol: "HTTP"
+              #       alb.ingress.kubernetes.io/listen-ports: "[{\"HTTPS\":443}]"
+              #       alb.ingress.kubernetes.io/tags: "Environment=hub,GitOps=true"
+              #     ingressClassName: "alb"
+              #     hosts: {{.metadata.annotations.argo_workflows_hosts}}
+              #     paths:
+              #       - /
+              #     pathType: Prefix
+              #     tls:
+              #     - hosts: {{.metadata.annotations.argo_workflows_hosts}}
+      
       destination:
         namespace: '{{default "argocd" .metadata.annotations.argocd_namespace}}'
         name: '{{.name}}'
