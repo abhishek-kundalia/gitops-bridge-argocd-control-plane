@@ -77,8 +77,9 @@ spec:
                     serviceType: "ClusterIP"  # Instance mode needs type NodePort, IP mode needs type ClusterIP or NodePort
                     backendProtocolVersion: "GRPC"  # This tells AWS to send traffic from the ALB using HTTP2. Can use gRPC as well if you want to leverage gRPC specific features
                   tls:
-                    - hosts: {{.metadata.annotations.argocd_hosts}}
-                  hosts: {{.metadata.annotations.argocd_hosts}}
+                    - hosts: 
+                        - "{{index (splitList "," .metadata.annotations.argocd_hosts) 0}}"
+                  host: "{{index (splitList "," .metadata.annotations.argocd_hosts) 0}}"
                   paths:
                     - /
                   pathType: Prefix
